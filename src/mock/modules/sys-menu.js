@@ -521,24 +521,36 @@ var navDataList = [
         'orderNum': 999,
         'open': null,
         'list': null
-      },
+      }
+    ],
+  },
+  {
+    'menuId': 33,
+    'parentId': 0,
+    'parentName': null,
+    'name': '教师',
+    'url': '',
+    'perms': null,
+    'type': 1,
+    'icon': 'log',
+    'orderNum': 99,
+    'open': null,
+    'list': [
       {
-        'menuId': 33,
-        'parentId': 1,
+        'menuId': 37,
+        'parentId': 33,
         'parentName': null,
-        'name': '教师',
+        'name': '课堂列表',
         'url': 'teacher/teacherClassList',
         'perms': null,
         'type': 1,
         'icon': 'log',
-        'orderNum': 99,
+        'orderNum': 999,
         'open': null,
         'list': null
       }
-    ],
-
+    ]
   }
-
 ]
 
 // 获取导航菜单列表 / 权限

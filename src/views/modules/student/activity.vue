@@ -14,7 +14,7 @@
     <div class="allCheck">
       <el-radio v-model="checkState" label="1" @change="getActivityByState('1')">所有活动({{countall}})</el-radio>
       <el-radio v-model="checkState" label="2" @change="getActivityByState('2')">进行中({{countprocess}})</el-radio>
-      <el-radio v-model="checkState" label="3" @change="getActivityByState('3')">已结束({{coutover}})</el-radio>
+      <el-radio v-model="checkState" label="3" @change="getActivityByState('3')">已结束({{countover}})</el-radio>
     </div>
     <ul>
       <li v-for="(p,index) in activityList" :key="index">
@@ -52,7 +52,7 @@
           nowPage:1,
           countall:'',
           countprocess:'',
-          coutover:'',
+          countover:'',
           max:1,
         }
       },
@@ -80,7 +80,7 @@
               this.max=data.max
               this.countall=data.countall
               this.countprocess=data. countprocess
-              this.coutover=data.coutover
+              this.countover=data.countover
             }
             else {
               this.$message({

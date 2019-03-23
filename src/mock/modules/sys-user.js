@@ -423,7 +423,7 @@ export  function getActivity() {
       {
         'countall':'5',
         'countprocess':'3',
-        'coutover':'2',
+        'countover':'2',
         'max':3,
         'status':200,
         'publishWorks':[
@@ -708,6 +708,17 @@ export  function getEvaluateList() {
         ],
         "status": 200,
         'max':3
+      }
+  }
+}
+//学生提交评价
+export  function studentReWorkOn() {
+  return {
+    url:'/student/remarkOn.do',
+    type:'post',
+    data:
+      {
+        'status':200
       }
   }
 }

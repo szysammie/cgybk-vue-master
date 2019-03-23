@@ -50,7 +50,6 @@ const mainRoutes = {
     next()
   }
 }
-
 const router = new Router({
   mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),

@@ -8,7 +8,8 @@
         <li v-for="(p,index) in studentList" :key="index">
           <img :src="p.sImgSrc" alt="" class="student-icon">
           <div class="partner-content">
-            <p class="sName">{{p.sName}}</p>
+            <p class="sName">{{p.sName}}&nbsp;排名:{{p.rank}}</p>
+            <p class="sumScore">总分:{{p.sumScore}}</p>
             <p class="sId">{{p.sId}}</p>
           </div>
         </li>
@@ -38,7 +39,7 @@
       methods:{
           getPartner(page=page?page:1){
             this.$http({
-              url: this.$http.adornUrl('/course/queryStudents.do'),
+              url: this.$http.adornUrl('/teacher/SearchStudents.do'),
               method: 'post',
               data:this.$http.adornData({
                 'page':page,
@@ -47,7 +48,7 @@
             }).then(({data}) => {
               if (data && data.status === 200) {
                 this.studentList=data.students
-                this.totalPage=data.pageNum
+                this.totalPage=data.max
                 this.loading=false
               }
             })
@@ -89,15 +90,23 @@ li{
   color:#666;
   position: absolute;
   top: 0px;
+  line-height: 5px;
 }
 .sId{
   position: absolute;
-  top: 20px;
+  top: 30px;
   color: #888;
+  line-height: 5px;
 }
   .paging{
     width: 200px;
-    height: 150px;
-    margin: 20px auto;
+    margin: auto;
+    margin-top: 100px;
+  }
+  .sumScore{
+    position: absolute;
+    top: 10px;
+    color: #888;
+
   }
 </style>

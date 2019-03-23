@@ -12,24 +12,24 @@
         <el-tab-pane label="成员" name="partner">
           <!--成员-->
           <span slot="label"><i class="el-icon-star-off"></i> 成员({{classInfo.stusNum}})</span>
-          <student-partner></student-partner>
+          <teacher-partner></teacher-partner>
         </el-tab-pane>
         <el-tab-pane label="活动" name="active">
           <span slot="label"><i class="el-icon-tickets"></i> 活动({{classInfo.pubWNum}})</span>
-          <student-activity></student-activity>
-        </el-tab-pane>
-        <el-tab-pane label="我的" name="myInf">
-          <span slot="label"><i class="el-icon-edit"></i> 我的</span>
-          <student-myData></student-myData>
+          <teacher-activity></teacher-activity>
         </el-tab-pane>
         <el-tab-pane label="评价" name="evaluate"> <span slot="label"><i class="el-icon-edit-outline"></i> 评价({{classInfo.pubENum}})</span></el-tab-pane>
+        <el-tab-pane label="我的" name="myInf">
+          <span slot="label"><i class="el-icon-edit"></i> 我的</span>
+          <teacher-myData></teacher-myData>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
 </template>
 
 <script>
-  import studentpartner from './partner'
+  import teacherpartner from './partner'
   import myData from './myData'
   import activity from './activity'
     export default {
@@ -47,9 +47,9 @@
           }
         },
       components:{
-        'student-partner':studentpartner,
-        'student-myData':myData,
-        'student-activity':activity
+        'teacher-partner':teacherpartner,
+        'teacher-myData':myData,
+        'teacher-activity':activity
       },
       mounted(){
         this.getClassInfo()

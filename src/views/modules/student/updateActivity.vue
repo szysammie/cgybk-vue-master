@@ -330,7 +330,7 @@
               });
               this.$router.replace({ name: 'class' })
             }else{
-              this.$message.success(data.msg)
+              this.$message.error(data.msg)
             }
           })
         }

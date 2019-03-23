@@ -88,7 +88,7 @@ li{
 .sName{
   color:#666;
   position: absolute;
-  top: 0px;
+  top: 0;
 }
 .sId{
   position: absolute;
@@ -97,7 +97,7 @@ li{
 }
   .paging{
     width: 200px;
-    height: 150px;
-    margin: 20px auto;
+    margin: auto;
+    margin-top: 100px;
   }
 </style>
