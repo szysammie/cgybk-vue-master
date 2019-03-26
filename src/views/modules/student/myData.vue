@@ -5,19 +5,30 @@
       type="warning"
       :closable="false">
       <div slot-scope="description">
-        <p class="el-alert__description">仅提供过去一周，一月，以及一学期的数据</p>
+        <p class="el-alert__description">提供平均分，作业情况，每次作业得分的数据</p>
       </div>
     </el-alert>
 
-    <el-select v-model="value" placeholder="请选择时长查看统计情况" class="selectDate"  @change="getMyData">
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      >
-      </el-option>
-    </el-select>
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <el-card>
+          <div id="uploadWork" class="chart-box"></div>
+        </el-card>
+      </el-col>
+      <el-col :span="12">
+        <el-card>
+          <div id="averScore" class="chart-box"></div>
+        </el-card>
+      </el-col>
+      <el-col :span="24">
+        <el-card>
+          <div id="workScore" class="chart-box"></div>
+        </el-card>
+      </el-col>
+    </el-row>
+
+
+
   </div>
 </template>
 
@@ -26,24 +37,26 @@
   export default {
     data() {
       return {
-        options: [{
-          value: 'week',
-          label: '过去七天'
-        }, {
-          value: 'month',
-          label: '过去一月'
-        }, {
-          value: 'term',
-          label: '过去一学期'
-        }],
-        value: 'week'
+        uploadWork:null,
+        averScore:null,
+        workScore:null,
       }
     },
-    methods:{
-      //根据用户选项获取对应时长的统计数据
-      getMyData(val){
-         console.log(val)
+    activated () {
+      // 由于给echart添加了resize事件, 在组件激活时需要重新resize绘画一次, 否则出现空白bug
+      if (this.uploadWork) {
+        this.uploadWork.resize()
       }
+      if (this.averScore) {
+        this.averScore.resize()
+      }
+      if (this.workScore) {
+        this.workScore.resize()
+      }
+
+    },
+    methods:{
+
     }
   }
 </script>

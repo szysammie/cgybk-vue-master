@@ -72,7 +72,7 @@ li{
   list-style: none;
   position: relative;
   margin-bottom: 10px;
-  border:1px solid #cccc77;
+  border:1px solid #E8CCA5;
   border-radius: 30px 30px 30px 30px;
   margin-right: 20px;
 }

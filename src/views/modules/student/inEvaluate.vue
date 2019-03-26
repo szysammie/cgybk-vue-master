@@ -9,7 +9,7 @@
     <el-card class="box-card">
       <div class="text item">
         <p>课程难度</p>
-        <el-rate v-model="eDiffcult" show-text></el-rate>
+        <el-rate v-model="eDifficult" show-text></el-rate>
       </div>
     </el-card>
     <el-card class="box-card">
@@ -37,7 +37,7 @@
     export default {
       data(){
         return{
-          eDiffcult:5,
+          eDifficult:5,
           eSpeed:5,
           eSuggest:'eSuggest',
           eFeel:5,
@@ -58,12 +58,12 @@
       methods:{
         uploadEvaluate(){
           this.$http({
-            url:'/student/remarkOn.do',
+            url:this.$http.adornUrl('/student/remarkOn.do'),
             method:'post',
             data: this.$http.adornData({
               'epId':localStorage.getItem('epId'),
               'eSpeed':this.eSpeed,
-              'eDiffcult':this.eDiffcult,
+              'eDifficult':this.eDifficult,
               'eFeel':this.eFeel,
               'eSuggest':this.ue.getContent()
             })

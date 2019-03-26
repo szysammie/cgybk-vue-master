@@ -9,7 +9,6 @@ export function login () {
     data: {
       'msg': 'success',
       'status': 200,
-      'expire': Mock.Random.natural(60 * 60 * 1, 60 * 60 * 12),
       'token': Mock.Random.string('abcdefghijklmnopqrstuvwxyz0123456789', 32),
       'timeOut':30
     }

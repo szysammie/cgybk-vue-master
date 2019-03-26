@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="success" icon="el-icon-plus" @click="joinClass()"circle></el-button>
+
     <ul v-loading="loading"
         element-loading-text="拼命加载中"
         element-loading-background="rgba(255, 255, 255, 0.8)"
@@ -13,14 +13,11 @@
         <p class="course-item">教师：<img :src="p.tImgSrc" :alt="p.tName" class="tIcon">{{p.tName}}</p>
       </li>
     </ul>
-    <!--弹窗，新增课堂-->
-    <joinClass  ref="joinClassButton" @update="update" ></joinClass>
-    <!--课堂-->
+
   </div>
 </template>
 
 <script>
-  import joinClass from './joinClass'
   import Class from  './class'
     export default {
       data() {
@@ -36,7 +33,6 @@
           }
         },
         components: {
-          'joinClass':joinClass,
           'Class':Class
         },
         mounted() {
@@ -61,11 +57,6 @@
                 }
               })
             },
-            joinClass() {
-              this.$nextTick(() => {
-                this.$refs.joinClassButton.init()
-              })
-            },
             inClass(cId){
               localStorage.setItem('cId',cId)
               this.$router.push({name:'class'})
@@ -87,6 +78,7 @@
    overflow: hidden;
    display: inline-block;
    margin-right: 10px;
+   margin-bottom: 15px;
  }
   img{
     width: 200px;

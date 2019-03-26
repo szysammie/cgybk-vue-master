@@ -11,29 +11,11 @@ for (let i = 0; i < Math.floor(Math.random() * 10 + 1); i++) {
     'status': 1,
     'roleIdList': null,
     'createUserId': 1,
-    'createTime': 'datetime'
+    'createTime': 'datetime',
+    'userImgSrc':'/static/img/avatar.03cb40b.png'
   }))
 }
 
-// 获取用户列表
-export function list () {
-  return {
-    // isOpen: false,
-    url: '/sys/user/list',
-    type: 'get',
-    data: {
-      'msg': 'success',
-      'status': 200,
-      'page': {
-        'totalCount': dataList.length,
-        'pageSize': 10,
-        'totalPage': 1,
-        'currPage': 1,
-        'list': dataList
-      }
-    }
-  }
-}
 
 // 获取用户信息
 export function info () {

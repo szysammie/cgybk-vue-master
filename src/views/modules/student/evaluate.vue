@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="noData" v-if="Viable">
-      <img src="~@/assets/img/pj.jpg" alt="" class="activityImg">
+      <img src="~@/assets/img/pj.jpg" alt="" >
     </div>
     <ul>
       <li v-for="(p,index) in publishEstimates" :key="index" >

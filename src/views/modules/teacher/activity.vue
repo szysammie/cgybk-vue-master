@@ -2,7 +2,7 @@
   <div>
 
       <el-autocomplete
-        placeholder="请输入活动名称,按回车键进行搜索"
+        placeholder="请输入活动名称搜索"
         suffix-icon="el-icon-search"
         v-model="activityName" class="searchInput"
         :fetch-suggestions="getActivityByName"
@@ -20,11 +20,12 @@
       <li v-for="(p,index) in activityList" :key="index">
         <img :src="p.activityImgSrc" alt="活动图片" class="activityImg">
         <div class="activityContent">
-            <span :class="p.pwBooleanState ? 'activityState-able' : 'activityState-notAble'">{{p.pwStringState}}</span>
-            <span :class="p.wBooleanState?'joinState-able':'joinState-notAble'">{{p.wStringState}}</span>
+          <span :class="p.pwBooleanState ? 'activityState-able' : 'activityState-notAble'">{{p.pwStringState}}</span>
 
-            <span>{{p.pwName}}</span>
-           <p>结束时间：{{p.pwEnd}}</p>
+          <span class="total">分值:{{p.pwScore}}</span>
+          <span class="finishedNum">参与人数:{{p.finishedNum}}</span>
+          <span>{{p.pwName}}</span>
+          <p>结束时间：{{p.pwEnd}}</p>
         </div>
         <el-button class="ac-btn" type="success" @click="inActivity(p.pwId)">进入活动</el-button>
       </li>
@@ -65,7 +66,7 @@
         getActivityByState(State){
           this.nowPage=1
           this.$http({
-            url: this.$http.adornUrl('/student/selectPw.do'),
+            url: this.$http.adornUrl('/teacher/queryPublishWork.dotime'),
             method: 'post',
             data:this.$http.adornData({
               'page':this.nowPage,
@@ -90,7 +91,7 @@
         },
         getActivityByName(name,cb){
           this.$http({
-            url: this.$http.adornUrl('/student/fuzzySearchWork.do'),
+            url: this.$http.adornUrl('/teacher/fuzzySearchWorkNames.do'),
             method: 'post',
             data:this.$http.adornData({
               'cId': localStorage.getItem('cId'),
@@ -111,7 +112,7 @@
         },
         handSelect(val){
           this.$http({
-            url: this.$http.adornUrl('/student/SearchPwByPwName.dotime'),
+            url: this.$http.adornUrl('/teacher/SearchPwByPwName.dotime'),
             method: 'post',
             data:this.$http.adornData({
               'cId': localStorage.getItem('cId'),
@@ -131,7 +132,7 @@
         },
         inActivity(pwId){
           localStorage.setItem('nowAcId',pwId)
-          this.$router.push({name:'updateActivity'})
+          this.$router.push({name:'teacher-editActivity'})
         }
       }
     }
@@ -149,9 +150,9 @@
   li:hover{
     border: 1px solid #0BD;
   }
-.allCheck{
-  margin: 30px;
-}
+  .allCheck{
+    margin: 30px;
+  }
   .activityState-able{
     width: 50px;
     height: 20px;
@@ -217,5 +218,38 @@
     float: right;
     margin-top: 30px;
     margin-right: 30px;
+  }
+  .total{
+    width: 60px;
+    height: 20px;
+    border: 1px solid #F56C6C;
+    color: #F56C6C;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+    display: inline-block;
+  }
+  .myScore{
+    width: 60px;
+    height: 20px;
+    border: 1px solid #409EFF;
+    color: #409EFF;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+    display: inline-block;
+  }
+  .finishedNum{
+    width: 85px;
+    height: 20px;
+    border: 1px solid #81C0C0;
+    color: #81C0C0;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+    display: inline-block;
   }
 </style>

@@ -44,6 +44,10 @@
       userName: {
         get () { return this.$store.state.user.name },
         set (val) { this.$store.commit('user/updateName', val) }
+      },
+      userImgSrc:{
+        get() {return this.$store.state.user.userImgSrc},
+        set(val){this.$store.commit('user/updateImgSrc', val)}
       }
     },
     created () {
@@ -68,10 +72,10 @@
           params: this.$http.adornParams()
         }).then(({data}) => {
           if (data && data.status === 200) {
-            // data && data.code === 0
             this.loading = false
             this.userName = data.role.name
             this.userId = data.role.username
+            this.userImgSrc = data.role.userImgSrc
           }
         })
       }

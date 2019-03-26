@@ -550,6 +550,33 @@ var navDataList = [
         'list': null
       }
     ]
+  },
+  {
+    'menuId': 39,
+    'parentId': 0,
+    'parentName': null,
+    'name': '设置',
+    'url': '',
+    'perms': null,
+    'type': 1,
+    'icon': 'log',
+    'orderNum': 99,
+    'open': null,
+    'list': [
+      {
+        'menuId': 39,
+        'parentId': 33,
+        'parentName': null,
+        'name': '个人设置',
+        'url': 'user/editInfo',
+        'perms': null,
+        'type': 1,
+        'icon': 'log',
+        'orderNum': 999,
+        'open': null,
+        'list': null
+      }
+    ]
   }
 ]
 

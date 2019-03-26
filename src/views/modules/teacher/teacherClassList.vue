@@ -1,11 +1,10 @@
 <template>
   <div>
-    <el-button type="success" icon="el-icon-plus" @click="creatClass()"circle></el-button>
     <ul v-loading="loading"
         element-loading-text="拼命加载中"
         element-loading-background="rgba(255, 255, 255, 0.8)"
     >
-      <li v-for="p in classList" :key="p.cId" @click="inClass(p.id)">
+      <li v-for="p in classList" :key="p.cId" @click="inClass(p.cId)">
         <img :src="p.cImgSrc" alt="">
         <p class="course-item">课堂号：{{p.cId}}</p>
         <p class="course-item">课堂名称：{{p.cName}}</p>
@@ -17,7 +16,7 @@
 </template>
 
 <script>
-  import creatClass from './creatClass'
+
     export default {
       data() {
         return {
@@ -31,10 +30,7 @@
           get() {return this.$store.state.user.id}
           }
         },
-        components: {
-          'creat-Class':creatClass,
 
-        },
         mounted() {
           this.getTeacherClass()
         },
@@ -53,7 +49,7 @@
               })
             },
             inClass(cId){
-              console.log(cId)
+
               localStorage.setItem('cId',cId)
               this.$router.push({name:'teacher-class'})
             },
@@ -71,6 +67,7 @@
    overflow: hidden;
    display: inline-block;
    margin-right: 10px;
+   margin-bottom: 15px;
  }
   img{
     width: 200px;

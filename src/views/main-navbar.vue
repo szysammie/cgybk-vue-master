@@ -27,16 +27,15 @@
 
 
 
-        <el-submenu index="3">
+        <el-submenu index="2">
           <template slot="title">Git源码</template>
-          <el-menu-item index="2-1"><a href="//github.com/daxiongYang/renren-fast-vue" target="_blank">前端</a></el-menu-item>
-          <el-menu-item index="2-2"><a href="//git.oschina.net/renrenio/renren-fast" target="_blank">后台</a></el-menu-item>
-          <el-menu-item index="2-3"><a href="//git.oschina.net/renrenio/renren-generator" target="_blank">代码生成器</a></el-menu-item>
+          <el-menu-item index="2-1"><a href="https://github.com/szysammie/cgybk-vue-master" target="_blank">前端</a></el-menu-item>
+          <el-menu-item index="2-2"><a href="https://github.com/2515106327/JobSubmissionSystem" target="_blank">后端</a></el-menu-item>
         </el-submenu>
         <el-menu-item class="site-navbar__avatar" index="3">
           <el-dropdown :show-timeout="0" placement="bottom">
             <span class="el-dropdown-link">
-              <img src="~@/assets/img/avatar.png" :alt="userName">{{ userName }}
+              <img :src="userImgSrc" :alt="userName">{{ userName }}
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item>
@@ -77,7 +76,11 @@
       },
       userName: {
         get () { return this.$store.state.user.name }
+      },
+      userImgSrc:{
+        get(){return this.$store.state.user.userImgSrc}
       }
+
     },
     methods: {
       // 修改密码
