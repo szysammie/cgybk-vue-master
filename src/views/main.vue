@@ -59,7 +59,7 @@
     methods: {
       // // 重置窗口可视高度
       resetDocumentClientHeight () {
-        this.documentClientHeight = 1300
+        this.documentClientHeight = 1500
         window.onresize = () => {
           this.documentClientHeight = document.documentElement['clientHeight']
         }
