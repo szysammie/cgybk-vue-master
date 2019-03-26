@@ -7,9 +7,9 @@
 - 发布时，可动态配置CDN静态资源／切换新旧版本
 - tab式数据，抛弃旧式多级多量菜单
 
-![demo-](./demo-screenshot/1.png)
+![demo-](./static/img/1.png)
 
-![demo-02](./demo-screenshot/2.png)
+![demo-02](./static/img/2.png)
 
 ## 说明文档
 
