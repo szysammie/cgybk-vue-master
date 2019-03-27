@@ -50,16 +50,16 @@
                 size="mini"
                 type="success"
                 @click="handView(scope.row.url)">在线预览</el-button>
-              <el-button
+              <a :href="scope.row.url" download="download"> <el-button
                 size="mini"
                 type="warning"
-                ><a :href="scope.row.url" download="download">下载</a></el-button>
+              >下载</el-button></a>
             </template>
           </el-table-column>
         </el-table>
 
         <el-table
-          :data="studentFilesImges"
+          :data="teacherFilesImges"
           style="width: 100%">
           <el-table-column
             label="图片"
@@ -72,10 +72,10 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button
+              <a :href="scope.row.url" download="download"><el-button
                 size="mini"
                 type="warning"
-              ><a :href="scope.row.url" download="download">下载</a></el-button>
+              >下载</el-button></a>
             </template>
           </el-table-column>
         </el-table>
@@ -107,8 +107,9 @@
         <el-upload
           class="upload-demo"
           :action="this.url"
-          :show-file-list="true"
+          :show-file-list="false"
           :on-success="uploadSuccess"
+          :headers="headers"
           multiple
           :on-error="uploadError"
           :disabled="!publishWork[0].sWState"
@@ -133,10 +134,10 @@
                 size="mini"
                 type="success"
                 @click="handView(scope.row.url)">在线预览</el-button>
-              <el-button
+              <a :href="scope.row.url" download="download"> <el-button
                 size="mini"
                 type="warning"
-              ><a :href="scope.row.url" download="download">下载</a></el-button>
+              >下载</el-button></a>
               <el-button
                 size="mini"
                 type="danger"
@@ -161,10 +162,10 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button
-                size="mini"
-                type="warning"
-              ><a :href="scope.row.url" download="download">下载</a></el-button>
+             <a :href="scope.row.url" download="download"> <el-button
+               size="mini"
+               type="warning"
+             >下载</el-button></a>
               <el-button
                 size="mini"
                 type="danger"
@@ -211,7 +212,7 @@
 
 <script>
   import ueditor from  'ueditor'
-  import viewOnline from './viewOnline'
+  import viewOnline from '../user/viewOnline'
     export default {
       data(){
         return {
@@ -239,7 +240,10 @@
           teacherFiles:[],
           uoloadedList:[],
           studentFilesImges:[],
-          teacherFilesImges:[]
+          teacherFilesImges:[],
+          headers:{
+            token:this.$cookie.get('token')
+          }
         }
       },
       components: {

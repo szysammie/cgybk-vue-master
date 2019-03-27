@@ -191,7 +191,7 @@ export  function getTeacherStudent() {
 
 
         ],
-      'max':'5',
+      'max':5,
       'status':200
     }
   }
@@ -212,7 +212,7 @@ export  function getTeacherActivity() {
             "pwId": "0",   //作业发布码
             "pwEnd": "3020-12-31",
             "activityImgSrc": "/static/img/avatar.03cb40b.png",
-            "pwName": "练习一",
+            "pwName": "练习一练习一练习一练习一练习一",
             "pwStringState": "进行中",   //作业进行状态
             "pwBooleanState": true,
             "pwScore": 100,  //发布作业总分值
@@ -297,6 +297,61 @@ export  function getTeacherHandleAcByName() {
           "cId": 1
         }
       ],
+      "status": 200
+    }
+  }
+}
+//教师查询活动数据
+export  function teacherEditAcInfo() {
+  return {
+    url:'/teacher/getPwDetails.do',
+    type:'post',
+    data:{
+      "teacherFilesImages": [
+        {
+          "name": "大数据.jpg",
+          "state": true,
+          "tfId": 1,
+          "type": "jpg",
+          "url": "/static/img/avatar.03cb40b.png"
+        }
+      ],
+      "teacherFiles": [
+        {
+          "name": "新建文本文档.txt",
+          "state": true,
+          "tfId": 4,
+          "type": "txt",
+          "url": "http://storage.xuetangx.com/public_assets/xuetangx/PDF/1.xls"
+        },
+        {
+          "name": "2018蓝桥杯笔记.doc",
+          "state": true,
+          "tfId": 5,
+          "type": "doc",
+          "url": "\\workfile\\1\\student\\1\\2018蓝桥杯笔记.doc"
+        }
+      ],
+      "publishWork": [
+        {
+          "pwScore": 100,
+          "pwName": "练习二",
+          "pwEnd": "2019-12-31",
+          "activityImgSrc": "\\imgSrc\\workimgdefault.png",
+          "pwContent": "什么是数据分析 有什么作用?",
+          'pwState':true
+        }
+      ],
+      "status": 200
+    }
+  }
+}
+//教师提交修改活动
+export  function teacherupdateAcInfo() {
+  return {
+    url:'/teacher/updatepublishWork.do',
+    type:'post',
+    data:{
       "status": 200
     }
   }

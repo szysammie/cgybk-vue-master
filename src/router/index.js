@@ -39,8 +39,9 @@ const mainRoutes = {
     { path: '/student-updateActivity', component: _import('modules/student/updateActivity'), name: 'updateActivity', meta: { title: '活动详情' ,isTab: true }},
     { path: '/student-inEvaluate', component: _import('modules/student/inEvaluate'), name: 'inEvaluate', meta: { title: '评价' ,isTab: true }},
     { path: '/teacher-class', component: _import('modules/teacher/class'), name: 'teacher-class', meta: { title: '我的课堂' ,isTab: true }},
-    { path: '/teacher-editActivity', component: _import('modules/teacher/editActivity'), name: 'teacher-editActivity', meta: { title: '批改作业' ,isTab: true }},
+    { path: '/teacher-Correction', component: _import('modules/teacher/Correction'), name: 'teacher-Correction', meta: { title: '批改作业' ,isTab: true }},
     { path: '/user-editInfo', component: _import('modules/user/editInfo'), name: 'user-editInfo', meta: { title: '个人设置' ,isTab: true }},
+    { path: '/teacher-editActivity', component: _import('modules/teacher/editActivity'), name: 'teacher-editActivity', meta: { title: '修改活动信息' ,isTab: true }},
   ],
   beforeEnter (to, from, next) {
     let token = Vue.cookie.get('token')

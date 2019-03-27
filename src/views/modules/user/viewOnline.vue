@@ -4,7 +4,7 @@
     :visible.sync="dialogVisible"
     width="80%"
     :fullscreen="true"
-    :before-close="handleClose">
+    >
     <iframe :src=this.url width='100%' height='800' frameborder='1'>
     </iframe>
 

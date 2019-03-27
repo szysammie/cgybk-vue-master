@@ -598,6 +598,18 @@ export  function getActivityInfo() {
             "state": true,
           }
         ],
+        'teacherFilesImages':[
+          {
+            "name": "2.png",
+            "url": "/static/img/avatar.03cb40b.png",
+            "sfId":1
+          },
+          {
+            "name": "2.png",
+            "url": "/static/img/favicon.ico",
+            "sfId":1
+          }
+        ],
         "publishWork": [
           {
             "pwScore": '100',   //老师规定的该次的作业分数  老师设置分数区间[5,100]

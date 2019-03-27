@@ -30,7 +30,7 @@
           return{
             loading:true,
             studentList:[],
-            totalPage:''
+            totalPage:1
           }
         },
         mounted(){

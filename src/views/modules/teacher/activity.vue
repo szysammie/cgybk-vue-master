@@ -14,7 +14,7 @@
     <div class="allCheck">
       <el-radio v-model="checkState" label="1" @change="getActivityByState('1')">所有活动({{countall}})</el-radio>
       <el-radio v-model="checkState" label="2" @change="getActivityByState('2')">进行中({{countprocess}})</el-radio>
-      <el-radio v-model="checkState" label="3" @change="getActivityByState('3')">已结束({{coutover}})</el-radio>
+      <el-radio v-model="checkState" label="3" @change="getActivityByState('3')">已结束({{countover}})</el-radio>
     </div>
     <ul>
       <li v-for="(p,index) in activityList" :key="index">
@@ -27,7 +27,9 @@
           <span>{{p.pwName}}</span>
           <p>结束时间：{{p.pwEnd}}</p>
         </div>
+
         <el-button class="ac-btn" type="success" @click="inActivity(p.pwId)">进入活动</el-button>
+        <el-button class="ac-btn" type="danger" @click="editAcInfo(p.pwId)">编辑活动</el-button>
       </li>
     </ul>
     <el-pagination
@@ -37,10 +39,12 @@
       :current-page="nowPage"
     >
     </el-pagination>
+    <editActivity ref="editActivity"></editActivity>
   </div>
 </template>
 
 <script>
+  import editActivity from './editActivity'
     export default {
       data(){
         return{
@@ -48,12 +52,16 @@
           checkState:'1',
           activityList:[],
           advanceList:[],
-          nowPage:'1',
-          countall:'',
-          countprocess:'',
-          coutover:'',
-          max:'',
+          nowPage:1,
+          countall:0,
+          countprocess:0,
+          countover:0,
+          max:1,
+
         }
+      },
+      components:{
+        'editActivity':editActivity
       },
       mounted(){
         this.getActivityByState(this.checkState)
@@ -79,7 +87,7 @@
               this.max=data.max
               this.countall=data.countall
               this.countprocess=data. countprocess
-              this.coutover=data.coutover
+              this.countover=data.countover
             }
             else {
               this.$message({
@@ -132,9 +140,15 @@
         },
         inActivity(pwId){
           localStorage.setItem('nowAcId',pwId)
+          this.$router.push({name:'teacher-Correction'})
+        },
+        editAcInfo(pwId){
+          localStorage.setItem('nowAcId',pwId)
           this.$router.push({name:'teacher-editActivity'})
-        }
+        },
+
       }
+
     }
 </script>
 
@@ -222,8 +236,8 @@
   .total{
     width: 60px;
     height: 20px;
-    border: 1px solid #F56C6C;
-    color: #F56C6C;
+    border: 1px solid #E6A23C;
+    color: #E6A23C;
     border-radius: 4px;
     font-size: 14px;
     text-align: center;
@@ -251,5 +265,33 @@
     text-align: center;
     line-height: 20px;
     display: inline-block;
+  }
+  .avatar-uploader .el-upload {
+    border: 1px dashed #409EFF;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    border: 1px dashed #409EFF;
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+  .uploadImg{
+    width: 50px;
+    height: 50px;
   }
 </style>
