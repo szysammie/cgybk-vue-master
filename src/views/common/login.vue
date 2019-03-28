@@ -6,7 +6,7 @@
           <h2 class="brand-info__text">成工云班课</h2>
           <p class="brand-info__intro">成工云班课是一套教务信息解决方案，采用Vue2.x和SSM开发</p>
         </div>
-        <div class="login-main">
+        <div class="login-main" v-if="isForgetPwd">
           <h3 class="login-title">登录系统</h3>
           <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" status-icon>
             <el-form-item prop="userName">
@@ -25,6 +25,7 @@
                   <img :src="captchaPath" @click="updataPath()" alt="">
                 </el-col>
               </el-row>
+              <a @click="isForgetPwd=!isForgetPwd">忘记密码？</a>
             </el-form-item>
             <el-form-item>
               <el-radio v-model="dataForm.role" label="1">学生</el-radio>
@@ -32,6 +33,18 @@
               <el-radio v-model="dataForm.role" label="3">教务处</el-radio>
               &nbsp;&nbsp;<el-checkbox v-model="dataForm.remPsd">自动登陆</el-checkbox>
               <el-button class="login-btn-submit" type="primary" @click="dataFormSubmit()">登录</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+        <div class="login-main" v-else="isForgetPwd">
+          <h3 class="login-title">忘记密码</h3>
+          <el-form>
+            <el-form-item>
+              <el-input v-model="isForgetPwdUserName" placeholder="输入待找回的学号或工号,密码发送至绑定邮箱"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" class="button" :class="{disabled: !this.canClick}" @click="countDown" :disabled="!canClick">{{content}}</el-button>
+              <el-button type="success" @click="isForgetPwd=!isForgetPwd">立即登陆</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -51,8 +64,13 @@
           // uuid: '',
           captcha: '',
           role:'1',
-          remPsd:true
+          remPsd:true,
         },
+        isForgetPwd:true,
+        isForgetPwdUserName:'',
+        content:'发送验证码',
+        canClick:true,
+        totalTime: 60,      //记录具体倒计时时间
         dataRule: {
           userName: [
             { required: true, message: '账号/工号不能为空', trigger: 'blur' }
@@ -72,29 +90,23 @@
     },
     methods: {
       // 提交表单
-      dataFormSubmit () {
+      dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({
               url: this.$http.adornUrl('/role/login.do'),
-              // role/login.do
-              // /sys/login
               method: 'post',
               data: this.$http.adornData({
                 'username': this.dataForm.userName,
                 'password': this.dataForm.password,
-                // 'uuid': this.dataForm.uuid,
                 'captcha': this.dataForm.captcha,
-                'role':this.dataForm.role,
-                'rememberMe':this.dataForm.remPsd
+                'role': this.dataForm.role,
+                'rememberMe': this.dataForm.remPsd
               })
             }).then(({data}) => {
               if (data && data.status === 200) {
-                // data && data.status === 200
-                // data && data.code === 0
-                this.$cookie.set('token', data.token,data.timeOut)
-                this.$router.replace({ name: 'home' })
-                // console.log(this.$cookie.get('token'))
+                this.$cookie.set('token', data.token, data.timeOut)
+                this.$router.replace({name: 'home'})
                 console.log(data.status)
               } else {
                 this.getCaptcha()
@@ -105,12 +117,51 @@
         })
       },
       // 获取验证码
-      getCaptcha () {
-        // this.dataForm.uuid = getUUID()
+      getCaptcha() {
         this.captchaPath = this.$http.adornUrl(`/role/checkCode`)
       },
-      updataPath(){
-        this.captchaPath +='?'
+      updataPath() {
+        this.captchaPath += '?'
+      },
+      countDown() {
+        this.getPwd()
+        if (!this.canClick) return
+        this.canClick = false
+        this.content = this.totalTime + 's后重新发送'
+        let clock = window.setInterval(() => {
+          this.totalTime--
+          this.content = this.totalTime + 's后重新发送'
+          if (this.totalTime < 0) {
+            window.clearInterval(clock)
+            this.content = '重新发送验证码'
+            this.totalTime = 60
+            this.canClick = true  //这里重新开启
+          }
+        }, 1000)
+      },
+
+      getPwd() {
+        if (this.isForgetPwdUserName == null || this.isForgetPwdUserName == "") {
+          this.$message.error("账号或工号不能为空")
+          return false;
+        } else {
+          this.$http({
+            url: this.$http.adornUrl('/role/getPwd'),
+            method: 'post',
+            data: this.$http.adornData({
+              'userName': this.isForgetPwdUserName
+            })
+          }).then(({data}) => {
+            if (data && data.status === 200) {
+              this.$message.success("发送成功，请前往绑定邮箱查看")
+              return true
+            } else {
+              this.$message.error(data.msg)
+              return false
+            }
+          })
+        }
+
       }
     }
   }
@@ -191,5 +242,11 @@
       width: 100%;
       margin-top: 38px;
     }
+  }
+  .disabled{
+    background-color: #ddd;
+    border-color: #ddd;
+    color:#57a3f3;
+    cursor: not-allowed; // 鼠标变化
   }
 </style>

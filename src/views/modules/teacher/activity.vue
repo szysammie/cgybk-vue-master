@@ -39,7 +39,7 @@
       :current-page="nowPage"
     >
     </el-pagination>
-    <editActivity ref="editActivity"></editActivity>
+
   </div>
 </template>
 

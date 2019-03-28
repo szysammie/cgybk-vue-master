@@ -1,4 +1,3 @@
-import Mock from 'mockjs'
 
 //   教师查询课堂
 export  function getTeacherClass() {
@@ -355,4 +354,64 @@ export  function teacherupdateAcInfo() {
       "status": 200
     }
   }
+}
+//教师查询某活动下的作业情况
+export  function teacherGetAcInfo() {
+  return {
+    url:'/teacher/getWorkDetails.do',
+    type:'post',
+    data:{
+      "teacherFilesImages": [
+        {
+          "name": "token.javv.png",
+          "state": true,
+          "tfId": 7,
+          "type": "png",
+          "url": "/static/img/avatar.03cb40b.png"
+        }
+      ],
+      "max": 1,    //最大页数
+      "countFinishStudents": 2, //已批改作业学生数量
+      "countNotFinishStudents": 2, //未提交作业学生数量
+      "countFinishsAndNotCheckStudent": 2, //待批改
+      "students": [
+        {
+          "twState": true,   //老师是否已批改参数
+          "sName": "阿斯达",
+          "activityImgSrc": "\\imgSrc\\student\\1\\studentavatar.jpeg",
+          "wScore": 91,
+          "checkStringState": "已批改",
+          "sId": "1"
+        },
+      {
+        "twState": false,
+        "sName": "陈治霖",
+        "activityImgSrc": "\\imgSrc\\userimgdefault.png",
+        "wScore": 0,
+        "checkStringState": "待批改",  //已批改  //未提交
+        "sId": "1601043104"
+      }
+    ],
+    "teacherFiles": [
+    {
+      "name": "token.javv.txt",
+      "state": true,
+      "tfId": 6,
+      "type": "txt",
+      "url": "\\workfile\\1\\student\\1\\token.javv.txt"
+    }
+  ],
+    "publishWork": [   //发布作业参数详情
+    {
+      "pwScore": 100,
+      "pwName": "练习三",
+      "pwEnd": "3020-12-31",
+      "activityImgSrc": "\\imgSrc\\workimgdefault.png",
+      "pwContent": "阿萨德撒旦"
+    }
+  ],
+    "status": 200
+}
+
+}
 }

@@ -99,3 +99,51 @@ export function del () {
     }
   }
 }
+//获取用户信息
+export function getRole () {
+  return {
+    url: '/role/getRole.do',
+    type: 'post',
+    data: {
+      "role": {
+        "userImgSrc": "\\imgSrc\\teacher\\1000000001\\studentavatar.png",
+        "userPhone": "13540409973",
+        "name": "武于璇",
+        "userEmail": "1000000001@qq.com",
+        "userName": "1000000001"
+      },
+      "status": 200
+    }
+  }
+}
+// 修改用户数据
+export function updateRoleInfo () {
+  return {
+    url: '/role/updateRoleInfo.do',
+    type: 'post',
+    data: {
+      "status": 200
+    }
+  }
+}
+//头像上传测试
+export function updateRoleAva () {
+  return {
+    url: '/role/updateAvatar.do',
+    type: 'post',
+    data: {
+      "status": 200
+    }
+  }
+}
+//获取用户密码
+export function getRolePwd() {
+  return {
+    url: '/role/getPwd',
+    type: 'post',
+    data: {
+      "status": 200
+    }
+  }
+}
+

@@ -53,6 +53,8 @@
         <el-upload
           class="upload-demo"
           :action="this.url"
+          :on-success="uploadSuccess"
+          :on-error="uploadError"
           multiple
           :show-file-list="false"
           :headers="headers"
