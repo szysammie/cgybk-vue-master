@@ -146,7 +146,7 @@
           return false;
         } else {
           this.$http({
-            url: this.$http.adornUrl('/role/getPwd'),
+            url: this.$http.adornUrl('/role/forgetpassword.do'),
             method: 'post',
             data: this.$http.adornData({
               'userName': this.isForgetPwdUserName

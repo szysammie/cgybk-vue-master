@@ -1,11 +1,6 @@
 <template>
     <div>
-      <el-autocomplete
-        v-model="suggestion"
-        :fetch-suggestions="querySearchAsync"
-        placeholder="请输入学号或姓名查询"
-        @select="handleSelect"
-      ></el-autocomplete>
+
       <h3>活动附件</h3>
       <el-table
         :data="teacherFileList"
@@ -53,8 +48,15 @@
           </template>
         </el-table-column>
       </el-table>
-
+      <h3>作业详情</h3>
+      <div v-html="publishWork[0].pwContent"></div>
       <h3>学生作业情况</h3>
+      <el-autocomplete
+        v-model="suggestion"
+        placeholder="请输入学号或姓名查询"
+        :fetch-suggestions="getStudentByName"
+        @select="handleSelect"
+      ></el-autocomplete>
       <div class="allCheck">
         <el-radio v-model="checkState" label="1" @change="getStudentByState('1')">待批改({{countFinishsAndNotCheckStudent}})</el-radio>
         <el-radio v-model="checkState" label="2" @change="getStudentByState('2')">未提交({{countNotFinishStudents}})</el-radio>
@@ -62,21 +64,28 @@
       </div>
       <ul>
         <li v-for="(p,sId) in students" :key="sId">
-
+          <img :src="p.activityImgSrc" alt="" class="student-icon">
+          <div class="partner-content">
+            <p class="sName">{{p.sName}}</p>
+            <el-button size="mini" round class="sId" type="success">改作业</el-button>
+          </div>
         </li>
       </ul>
       <el-pagination
         layout="prev, pager, next"
         :current-page="nowPage"
         class="pagination"
+        @current-change="selectAc"
         :page-count="max">
       </el-pagination>
       <viewOnline ref="viewOnline"></viewOnline>
+
     </div>
 </template>
 
 <script>
   import viewOnline from  '../user/viewOnline'
+
     export default {
         data(){
           return {
@@ -90,23 +99,25 @@
             teacherFileList:[],
             nowPage:1,
             max:1,
-            publishWork:[]
+            publishWork:[],
+            advanceList:[]
           }
         },
       components:{
-        viewOnline
+        viewOnline,
       },
       mounted(){
-        this.getAcInfoByState()
+        this.getAcInfoByState(this.checkState)
       },
       methods:{
-        getAcInfoByState(){
+        getAcInfoByState(State){
+          this.nowPage=1
           this.$http({
             url: this.$http.adornUrl('/teacher/getWorkDetails.do'),
             method: 'post',
             data: this.$http.adornData({
               'pwId': localStorage.getItem('nowAcId'),
-              'state': this.checkState,
+              'state': State,
               'page':this.nowPage
             })
           }).then(({data}) => {
@@ -123,6 +134,50 @@
             this.$refs.viewOnline.init(url)
           })
         },
+        getStudentByName(name,cb){
+          this.$http({
+            url: this.$http.adornUrl('/teacher/fuzzySearchStudent.do'),
+            method: 'post',
+            data:this.$http.adornData({
+              'nameOrId':name
+            })
+          }).then(({data}) => {
+            if (data && data.status === 200) {
+              this.advanceList=data.students
+              cb(this.advanceList)
+            }
+            else {
+              this.$message({
+                message:data.msg,
+                type:'error'
+              })
+            }
+          })
+        },
+        handSelect(val){
+          this.$http({
+            url: this.$http.adornUrl('/teacher/SearchPwByPwName.dotime'),
+            method: 'post',
+            data:this.$http.adornData({
+              'cId': localStorage.getItem('cId'),
+              'pwName':val.value
+            })
+          }).then(({data}) => {
+            if (data && data.status === 200) {
+              this.activityList=data.fuzzySearchWorks
+            }
+            else {
+              this.$message({
+                message:data.msg,
+                type:'error'
+              })
+            }
+          })
+        },
+        selectAc(page){
+          this.nowPage=page
+          this.getAcInfoByState(this.checkState)
+        }
       }
     }
 </script>
@@ -140,11 +195,36 @@
     height: 50px;
   }
   li{
-    width: 20%;
-    height: 90px;
-    list-style: none;
-    border: 1px solid #e1e1e1;
-    margin-right: 15px;
     display: inline-block;
+    width: 150px;
+    height: 60px;
+    background: #fff;
+    list-style: none;
+    position: relative;
+    margin-bottom: 10px;
+    border:1px solid skyblue;
+    border-radius: 30px 30px 30px 30px;
+    margin-right: 20px;
+  }
+
+  .partner-content{
+    display: inline-block;
+  }
+  .sName{
+    color:#666;
+    position: absolute;
+    top: 0px;
+    line-height: 5px;
+  }
+  .sId{
+    position: absolute;
+    top: 30px;
+    line-height: 5px;
+  }
+  .student-icon{
+    display: inline-block;
+    width: 55px;
+    height: 58px;
+    border-radius: 50%;
   }
 </style>

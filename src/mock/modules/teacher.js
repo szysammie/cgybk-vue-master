@@ -378,7 +378,7 @@ export  function teacherGetAcInfo() {
         {
           "twState": true,   //老师是否已批改参数
           "sName": "阿斯达",
-          "activityImgSrc": "\\imgSrc\\student\\1\\studentavatar.jpeg",
+          "activityImgSrc": "/static/img/avatar.03cb40b.png",
           "wScore": 91,
           "checkStringState": "已批改",
           "sId": "1"
@@ -386,7 +386,7 @@ export  function teacherGetAcInfo() {
       {
         "twState": false,
         "sName": "陈治霖",
-        "activityImgSrc": "\\imgSrc\\userimgdefault.png",
+        "activityImgSrc": "/static/img/avatar.03cb40b.png",
         "wScore": 0,
         "checkStringState": "待批改",  //已批改  //未提交
         "sId": "1601043104"

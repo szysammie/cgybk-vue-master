@@ -139,7 +139,7 @@ export function updateRoleAva () {
 //获取用户密码
 export function getRolePwd() {
   return {
-    url: '/role/getPwd',
+    url: '/role/forgetpassword.do',
     type: 'post',
     data: {
       "status": 200

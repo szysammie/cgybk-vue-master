@@ -5,7 +5,7 @@
        element-loading-background="rgba(255, 255, 255, 0.8)"
   >
     <ul>
-        <li v-for="(p,index) in studentList" :key="index">
+        <li v-for="(p,index) in studentList" :key="index" @click="showStudentInfo(p.sId)">
           <img :src="p.sImgSrc" alt="" class="student-icon">
           <div class="partner-content">
             <p class="sName">{{p.sName}}&nbsp;排名:{{p.rank}}</p>
@@ -21,10 +21,13 @@
       @current-change="handChange"
     >
     </el-pagination>
+
+    <showStudentInfo ref="showStudentInfo"></showStudentInfo>
   </div>
 
 </template>
 <script>
+  import showStudentInfo from './showStudentInfo'
     export default {
         data(){
           return{
@@ -36,6 +39,9 @@
         mounted(){
           this.getPartner()
         },
+      components:{
+        showStudentInfo
+      },
       methods:{
           getPartner(page=page?page:1){
             this.$http({
@@ -55,6 +61,11 @@
           },
         handChange(page){
             this.getPartner(page)
+        },
+        showStudentInfo(sId){
+          this.$nextTick(() => {
+            this.$refs.showStudentInfo.init(sId)
+          })
         }
       }
     }
@@ -73,7 +84,7 @@ li{
   list-style: none;
   position: relative;
   margin-bottom: 10px;
-  border:1px solid #E8CCA5;
+  border:1px solid skyblue;
   border-radius: 30px 30px 30px 30px;
   margin-right: 20px;
 }

@@ -110,7 +110,7 @@
   }
   .header{
     height: 90px;
-    border-bottom: 2px solid #24A4FE;
+
   }
   .nav-header{
     margin: 10px auto;
