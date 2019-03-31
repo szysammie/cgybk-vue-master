@@ -58,9 +58,9 @@
         @select="handSelect"
       ></el-autocomplete>
       <div class="allCheck">
-        <el-radio v-model="checkState" label="1" @change="getStudentByState('1')">待批改({{countFinishsAndNotCheckStudent}})</el-radio>
-        <el-radio v-model="checkState" label="2" @change="getStudentByState('2')">未提交({{countNotFinishStudents}})</el-radio>
-        <el-radio v-model="checkState" label="3" @change="getStudentByState('3')">已批改({{countFinishStudents}})</el-radio>
+        <el-radio v-model="checkState" label="1" @change="getAcInfoByState('1')">待批改({{countFinishsAndNotCheckStudent}})</el-radio>
+        <el-radio v-model="checkState" label="2" @change="getAcInfoByState('2')">未提交({{countNotFinishStudents}})</el-radio>
+        <el-radio v-model="checkState" label="3" @change="getAcInfoByState('3')">已批改({{countFinishStudents}})</el-radio>
       </div>
       <ul>
         <li v-for="(p,sId) in students" :key="sId">
