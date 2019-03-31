@@ -376,16 +376,16 @@ export  function teacherGetAcInfo() {
       "countFinishsAndNotCheckStudent": 2, //待批改
       "students": [
         {
-          "twState": true,   //老师是否已批改参数
+          "twState": false,   //老师是否已批改参数
           "sName": "阿斯达",
           "activityImgSrc": "/static/img/avatar.03cb40b.png",
           "wScore": 91,
-          "checkStringState": "已批改",
+          "checkStringState": "待批改",
           "sId": "1"
         },
       {
-        "twState": false,
-        "sName": "陈治霖",
+        "twState": true,
+        "sName": "陈治霖霖",
         "activityImgSrc": "/static/img/avatar.03cb40b.png",
         "wScore": 0,
         "checkStringState": "待批改",  //已批改  //未提交
@@ -407,11 +407,101 @@ export  function teacherGetAcInfo() {
       "pwName": "练习三",
       "pwEnd": "3020-12-31",
       "activityImgSrc": "\\imgSrc\\workimgdefault.png",
-      "pwContent": "阿萨德撒旦"
+      "pwContent": "<p>阿萨德撒旦</p>"
     }
   ],
     "status": 200
 }
-
 }
+}
+// 教师查看某一学生的情况
+export  function selectStudentBySid() {
+  return {
+    url:'/teacher/SearchStudent.do',
+    type:'post',
+    data:{
+      "role": {
+        "userImgSrc": "\\imgSrc\\student\\1\\avatar.jpeg",
+        "userPhone": "13540409972",
+        "name": "同学1",
+        "userMajor": "软件工程",
+        "userEmail": "2515106327@qq.com",
+        "userName": "1"
+      },
+      "submitMap": [
+        {
+          "name": "已提交",
+          "value": 4
+        },
+        {
+          "name": "未提交",
+          "value": 4
+        }
+      ],
+      "averScore": [
+        {
+          "name": "我的平均分",
+          "value": 77.25
+        },
+        {
+          "name": "仍需努力的分数",
+          "value": 22.75
+        }
+      ],
+      "listInt": [
+        89,
+        78,
+        77,
+        65
+      ],
+      "listString": [
+        "练习一",
+        "练习二",
+        "练习三",
+        "练习四"
+      ],
+      "status": 200
+    }
+  }
+}
+
+
+
+// 教师按照姓名或者学号查询学生
+export  function getStudentByNameOrSid() {
+  return {
+    url:'/teacher/fuzzySearchStudent.do',
+    type:'post',
+    data:{
+      "students":[{
+        "value":"同学一",
+        "sId":1
+      },
+        {
+          "value":"170634",
+          "sId":1706034,
+        }
+      ],
+      "status":200
+    }
+  }
+}
+//教师查询到某个学生
+export  function getStudentBySid() {
+  return {
+    url:'/teacher/queryWorkBySid.do',
+    type:'post',
+    data:{
+      "work": [
+        {
+          "sName": "同学1",
+          "activityImgSrc": "/static/img/avatar.03cb40b.png",
+          "wScore": 77,
+          "checkStringState": "带批改",
+          "sId": "1"
+        }
+      ],
+      "status": 200
+    }
+  }
 }

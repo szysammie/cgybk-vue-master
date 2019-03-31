@@ -3,8 +3,10 @@
     <div class="site-content__wrapper">
       <div class="site-content">
         <div class="brand-info">
-          <h2 class="brand-info__text">成工云班课</h2>
+          <img src="~@/assets/img/logo.png" alt="">
+          <h2 class="brand-info__text" style="display: inline-block">成工云班课</h2>
           <p class="brand-info__intro">成工云班课是一套教务信息解决方案，采用Vue2.x和SSM开发</p>
+
         </div>
         <div class="login-main" v-if="isForgetPwd">
           <h3 class="login-title">登录系统</h3>

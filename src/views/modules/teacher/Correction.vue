@@ -55,7 +55,7 @@
         v-model="suggestion"
         placeholder="请输入学号或姓名查询"
         :fetch-suggestions="getStudentByName"
-        @select="handleSelect"
+        @select="handSelect"
       ></el-autocomplete>
       <div class="allCheck">
         <el-radio v-model="checkState" label="1" @change="getStudentByState('1')">待批改({{countFinishsAndNotCheckStudent}})</el-radio>
@@ -66,8 +66,9 @@
         <li v-for="(p,sId) in students" :key="sId">
           <img :src="p.activityImgSrc" alt="" class="student-icon">
           <div class="partner-content">
-            <p class="sName">{{p.sName}}</p>
-            <el-button size="mini" round class="sId" type="success">改作业</el-button>
+            <span class="sName">{{p.sName}}</span>
+            <span :class="p.twState ? 'State-able':'State-notable'">{{p.checkStringState}}</span>
+            <el-button size="small" round class="sId" type="success">改作业</el-button>
           </div>
         </li>
       </ul>
@@ -99,7 +100,15 @@
             teacherFileList:[],
             nowPage:1,
             max:1,
-            publishWork:[],
+            publishWork:[
+              {
+                pwScore: 100,
+                pwName: "练习三",
+                pwEnd: "z3020-12-31",
+                activityImgSrc: "\\imgSrc\\workimgdefault.png",
+                pwContent: "<p>阿萨德撒旦</p>"
+              }
+            ],
             advanceList:[]
           }
         },
@@ -156,15 +165,15 @@
         },
         handSelect(val){
           this.$http({
-            url: this.$http.adornUrl('/teacher/SearchPwByPwName.dotime'),
+            url: this.$http.adornUrl('/teacher/queryWorkBySid.do'),
             method: 'post',
             data:this.$http.adornData({
-              'cId': localStorage.getItem('cId'),
-              'pwName':val.value
+              'pwId': localStorage.getItem('nowAcId'),
+              'sId':val.sId
             })
           }).then(({data}) => {
             if (data && data.status === 200) {
-              this.activityList=data.fuzzySearchWorks
+              this.students = data.work
             }
             else {
               this.$message({
@@ -196,7 +205,7 @@
   }
   li{
     display: inline-block;
-    width: 150px;
+    width: 175px;
     height: 60px;
     background: #fff;
     list-style: none;
@@ -213,8 +222,30 @@
   .sName{
     color:#666;
     position: absolute;
-    top: 0px;
-    line-height: 5px;
+    top: 12px;
+    line-height: 15px;
+  }
+  .State-able{
+    color:#67C23A;
+    position: absolute;
+    top: 12px;
+    right: 11px;
+    line-height: 15px;
+    border: 1px solid #67C23A;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+  }
+  .State-notable{
+    color:#F56C6C;
+    position: absolute;
+    top: 12px;
+    right: 11px;
+    line-height: 15px;
+    border: 1px solid #F56C6C;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
   }
   .sId{
     position: absolute;

@@ -6,7 +6,7 @@
         suffix-icon="el-icon-search"
         v-model="activityName" class="searchInput"
         :fetch-suggestions="getActivityByName"
-        :trigger-on-focus="false"
+
         @select="handSelect"
       >
       </el-autocomplete>

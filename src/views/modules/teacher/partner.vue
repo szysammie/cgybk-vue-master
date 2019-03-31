@@ -87,6 +87,7 @@ li{
   border:1px solid skyblue;
   border-radius: 30px 30px 30px 30px;
   margin-right: 20px;
+  cursor: pointer;
 }
 .student-icon{
   display: inline-block;
