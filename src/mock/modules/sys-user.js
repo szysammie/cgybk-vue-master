@@ -559,11 +559,13 @@ export  function getActivityInfo() {
             "name": "1.png",
             "url": "22222222",
             "sfId":2,
+            "state":true
           },
           {
             "name": "2.png",
             "url": "111111",
             "sfId":1,
+            "state":true
           }
         ],
         "studentFilesImages":[
@@ -620,7 +622,7 @@ export  function getActivityInfo() {
             "wContent": "11111",  //学生作答文字区
             "wProblem": "不会加法",  //学生的队该次作业的提问
             "wScore": '90',   //老师批改的分数
-            "pwContent": "计算1-1",  //老师发布作业的  作业内容
+            "pwContent": "<p style='color: red;'>计算1-1</p>",  //老师发布作业的  作业内容
             "pwEnd":"2019-3-10"
           }
         ],

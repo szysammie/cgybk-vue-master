@@ -9,9 +9,9 @@
       <span>学号：{{role.userName}}</span>
       <p>手机号：{{role.userPhone}} 专业：{{role.userMajor}}</p>
       <p>邮箱：{{role.userEmail}}</p>
-      <div id="uploadWork" class="chart-box" style="width: 500px;height: 300px;"></div>
-      <div id="averScore" class="chart-box" style="width: 500px;height: 300px;"></div>
-      <div id="workScore" class="chart-box" style="width: 500px;height: 500px;"></div>
+      <div id="uploadWork" class="chart-box" style="width: 500px;height: 300px;margin:0 auto"></div>
+      <div id="averScore" class="chart-box" style="width: 500px;height: 300px;margin:0 auto"></div>
+      <div id="workScore" class="chart-box" style="width: 500px;height: 500px;margin:0 auto"></div>
     </el-dialog>
   </div>
 </template>

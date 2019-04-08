@@ -12,17 +12,17 @@
     <el-row :gutter="20">
       <el-col :span="12">
         <el-card>
-          <div id="uploadWork" class="chart-box" style="width: 500px;height: 300px;"></div>
+          <div id="uploadWork" class="chart-box" style="width: 500px;height: 300px;margin: auto;"></div>
         </el-card>
       </el-col>
       <el-col :span="12">
         <el-card>
-          <div id="averScore" class="chart-box" style="width: 500px;height: 300px;"></div>
+          <div id="averScore" class="chart-box" style="width: 500px;height: 300px;margin: auto;"></div>
         </el-card>
       </el-col>
       <el-col :span="24">
         <el-card>
-          <div id="workScore" class="chart-box" style="width: 900px;height: 500px;"></div>
+          <div id="workScore" class="chart-box" style="width:900px;height: 500px;margin:20px "></div>
         </el-card>
       </el-col>
     </el-row>

@@ -15,7 +15,7 @@
         </li>
     </ul>
     <el-pagination
-      background
+
       layout="prev, pager, next"
       :page-count="totalPage" class="paging"
       @current-change="handChange"

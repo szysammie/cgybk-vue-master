@@ -18,7 +18,10 @@
           <span slot="label"><i class="el-icon-tickets"></i> 活动({{classInfo.pubWNum}})</span>
           <teacher-activity></teacher-activity>
         </el-tab-pane>
-        <el-tab-pane label="评价" name="evaluate"> <span slot="label"><i class="el-icon-edit-outline"></i> 评价({{classInfo.pubENum}})</span></el-tab-pane>
+        <el-tab-pane label="评价" name="evaluate"> <span slot="label"><i class="el-icon-edit-outline">
+        </i> 评价({{classInfo.pubENum}})</span>
+          <teacher-comment></teacher-comment>
+        </el-tab-pane>
         <el-tab-pane label="我的" name="myInf">
           <span slot="label"><i class="el-icon-edit"></i> 我的</span>
           <teacher-myData></teacher-myData>
@@ -32,6 +35,7 @@
   import teacherpartner from './partner'
   import myData from './myData'
   import activity from './activity'
+  import comment from './evaluate.vue'
     export default {
         data(){
           return {
@@ -49,7 +53,8 @@
       components:{
         'teacher-partner':teacherpartner,
         'teacher-myData':myData,
-        'teacher-activity':activity
+        'teacher-activity':activity,
+        'teacher-comment':comment
       },
       mounted(){
         this.getClassInfo()

@@ -2,6 +2,8 @@
     <div>
 
       <h3>活动附件</h3>
+      <el-button type="primary" @click="downloadAllStudentFiles" :loading="loading">{{content}}</el-button>
+      <el-button type="success" :disabled="downloadState" @click="download">下载</el-button>
       <el-table
         :data="teacherFileList"
         style="width: 100%">
@@ -68,7 +70,7 @@
           <div class="partner-content">
             <span class="sName">{{p.sName}}</span>
             <span :class="p.twState ? 'State-able':'State-notable'">{{p.checkStringState}}</span>
-            <el-button size="small" round class="sId" type="success">改作业</el-button>
+            <el-button size="small" round class="sId" type="success" @click="dealWork(p.sId)">改作业</el-button>
           </div>
         </li>
       </ul>
@@ -92,9 +94,9 @@
           return {
             suggestion:'',
             checkState:'1',
-            countNotFinishStudents: 2,
-            countFinishsAndNotCheckStudent: 2,
-            countFinishStudents: 1,
+            countNotFinishStudents: 0,
+            countFinishsAndNotCheckStudent: 0,
+            countFinishStudents: 0,
             students:[],
             teacherImgFileList:[],
             teacherFileList:[],
@@ -103,13 +105,17 @@
             publishWork:[
               {
                 pwScore: 100,
-                pwName: "练习三",
-                pwEnd: "z3020-12-31",
-                activityImgSrc: "\\imgSrc\\workimgdefault.png",
-                pwContent: "<p>阿萨德撒旦</p>"
+                pwName: "",
+                pwEnd: "",
+                activityImgSrc: "",
+                pwContent: ""
               }
             ],
-            advanceList:[]
+            advanceList:[],
+            loading:false,
+            content:'导出所有学生附件',
+            downloadState:true,
+            downloadUrl:''
           }
         },
       components:{
@@ -135,6 +141,9 @@
                this.teacherImgFileList = data.teacherFilesImages
                this.teacherFileList = data.teacherFiles
                this.students = data.students
+               this.countNotFinishStudents=data.countNotFinishStudents,
+               this.countFinishsAndNotCheckStudent=data.countFinishsAndNotCheckStudent,
+               this.countFinishStudents=data.countFinishStudents
             }
           })
         },
@@ -186,6 +195,31 @@
         selectAc(page){
           this.nowPage=page
           this.getAcInfoByState(this.checkState)
+        },
+        dealWork(sId){
+          sessionStorage.setItem('sId',sId)
+          this.$router.push({ name: 'teacher-dealWork' })
+        },
+        downloadAllStudentFiles(){
+          this.loading = true
+          this.content = '正在导出'
+          this.$http({
+            url: this.$http.adornUrl('/work/downloadFileWork.do'),
+            method: 'post',
+            data: this.$http.adornData({
+              'pwId': localStorage.getItem('nowAcId'),
+            })
+          }).then(({data}) => {
+            if (data && data.status === 200) {
+                this.loading = false
+                this.content = '导出成功，可重新导出'
+                this.downloadUrl = data.Addr
+                this.downloadState = false
+            }
+          })
+        },
+        download(){
+          window.open(this.downloadUrl, '_blank')
         }
       }
     }

@@ -78,6 +78,7 @@
               <el-button
                 size="mini"
                 type="success"
+                :disabled="!scope.row.state"
                 @click="handView(scope.row.url)">在线预览</el-button>
               <a :href="scope.row.url" download="download"> <el-button
                 size="mini"

@@ -208,7 +208,7 @@ export  function getTeacherActivity() {
           "countover": 1,  //已经结束的作业数量
           "publishWorks": [
           {
-            "pwId": "0",   //作业发布码
+            "pwId": "5",   //作业发布码
             "pwEnd": "3020-12-31",
             "activityImgSrc": "/static/img/avatar.03cb40b.png",
             "pwName": "练习一练习一练习一练习一练习一",
@@ -218,7 +218,7 @@ export  function getTeacherActivity() {
             "finishedNum": 1   //已经参与的学生数量
           },
             {
-              "pwId": "0",   //作业发布码
+              "pwId": "3",   //作业发布码
               "pwEnd": "3020-12-31",
               "activityImgSrc": "/static/img/avatar.03cb40b.png",
               "pwName": "练习二",
@@ -228,7 +228,7 @@ export  function getTeacherActivity() {
               "finishedNum": 1   //已经参与的学生数量
             },
             {
-              "pwId": "0",   //作业发布码
+              "pwId": "1",   //作业发布码
               "pwEnd": "3020-12-31",
               "activityImgSrc": "/static/img/avatar.03cb40b.png",
               "pwName": "练习一",
@@ -318,7 +318,7 @@ export  function teacherEditAcInfo() {
       "teacherFiles": [
         {
           "name": "新建文本文档.txt",
-          "state": true,
+          "state": false,
           "tfId": 4,
           "type": "txt",
           "url": "http://storage.xuetangx.com/public_assets/xuetangx/PDF/1.xls"
@@ -373,7 +373,7 @@ export  function teacherGetAcInfo() {
       "max": 1,    //最大页数
       "countFinishStudents": 2, //已批改作业学生数量
       "countNotFinishStudents": 2, //未提交作业学生数量
-      "countFinishsAndNotCheckStudent": 2, //待批改
+      "countFinishsAndNotCheckStudent": 3, //待批改
       "students": [
         {
           "twState": false,   //老师是否已批改参数
@@ -501,6 +501,210 @@ export  function getStudentBySid() {
           "sId": "1"
         }
       ],
+      "status": 200
+    }
+  }
+}
+//教师批改某个学生的作业
+export  function teacherDealWork() {
+  return {
+    url:'/teacher/selectOneWorkDetail.do',
+    type:'post',
+    data:{
+      "studentFiles": [
+        {
+          "name": "算法入门学习记录表.docx",
+          "sfId": 17,
+          "state": false,
+          "type": "docx",
+          "url": "\\workfile\\1\\student\\1\\28a3c11964874d2ba89d728b7c8e8db0.docx"
+        }
+      ],
+      "studentFilesImages": [
+        {
+          "name": "TIM图片20171225201403.png",
+          "sfId": 13,
+          "state": true,
+          "type": "png",
+          "url": "/static/img/avatar.03cb40b.png"
+        },
+        {
+          "name": "xpic5904.jpg",
+          "sfId": 16,
+          "state": true,
+          "type": "jpg",
+          "url": "/static/img/avatar.03cb40b.png"
+        }
+      ],
+      "publishWork": [
+        {
+          "sName":"张飞",
+          "sId":"117031",
+          "wRemark": "做的不错",
+          "wContent":"问我 ",
+          "activityImgSrc":"/static/img/avatar.03cb40b.png",
+          "wProblem": "<p>请问老师什么是<strong>大数据？</强></p>",
+          "wScore": 78,
+          "pwContent": "什么是数据分析 有什么作用?"
+        }
+      ],
+      "status": 200
+    }
+  }
+}
+
+//教师提交批改学生的数据
+export  function updateStudentWork() {
+  return {
+    url:'/teacher/TeacherUpadte.do',
+    type:'post',
+    data:{
+      "status": 200
+    }
+  }
+}
+//教师发布活动
+export  function addAc() {
+  return {
+    url:'/teacher/publishWork.do',
+    type:'post',
+    data:{
+      "pwId":"sdasdas6555",
+      "status": 200
+    }
+  }
+}
+//教师导出所有学生上传的附件
+export  function downloadFiles() {
+  return {
+    url:'/work/downloadFileWork.do',
+    type:'post',
+    data:{
+      "Addr":"sdasdas6555",
+      "status": 200
+    }
+  }
+}
+//教师发布评价
+export  function addNewAc() {
+  return {
+    url:'/teacher/publishEstimate.do',
+    type:'post',
+    data:{
+      "status": 200
+    }
+  }
+}
+//教师查询评价
+export  function getPE() {
+  return {
+    url:'/teacher/selectPE.do',
+    type:'post',
+    data:{
+      "publishEstimates":[
+        {
+          "epStartTime":"2018-12-03",
+          "epId":"23123415vbbbb",
+          "activityImgSrc":"/static/img/avatar.03cb40b.png",
+          "epName":"fefef"
+        },
+        {
+          "epStartTime":"2018-12-03",
+          "epId":"23123415vbbbb",
+          "activityImgSrc":"/static/img/avatar.03cb40b.png",
+          "epName":"fefef"
+        },
+        {
+          "epStartTime":"2018-12-03",
+          "epId":"23123415vbbbb",
+          "activityImgSrc":"/static/img/avatar.03cb40b.png",
+          "epName":"fefef"
+        },
+        ],
+      "max":1,
+      "status": 200
+    }
+  }
+}
+//教师查看评价
+export  function getEvaData() {
+  return {
+    url:'/teacher/selectEstimate.do',
+    type:'post',
+    data:{
+      "Estimate": {
+        "eSpeeds": [
+          {
+            "value": 12,
+            "name": "1星"
+          },
+          {
+            "value": 7,
+            "name": "2星"
+          },
+          {
+            "value": 4,
+            "name": "3星"
+          },
+          {
+            "value": 16,
+            "name": "4星"
+          },
+          {
+            "value": 33,
+            "name": "5星"
+          }
+        ],
+        "eDifficults": [
+          {
+            "value": 12,
+            "name": "1星"
+          },
+          {
+            "value": 7,
+            "name": "2星"
+          },
+          {
+            "value": 4,
+            "name": "3星"
+          },
+          {
+            "value": 16,
+            "name": "4星"
+          },
+          {
+            "value": 33,
+            "name": "5星"
+          }
+        ],
+        "eFeels": [
+          {
+            "value": 12,
+            "name": "1星"
+          },
+          {
+            "value": 7,
+            "name": "2星"
+          },
+          {
+            "value": 4,
+            "name": "3星"
+          },
+          {
+            "value": 16,
+            "name": "4星"
+          },
+          {
+            "value": 33,
+            "name": "5星"
+          }
+        ],
+        "eSuggests": [
+          {
+            "eSuggest": ""
+          }
+        ]
+      },
       "status": 200
     }
   }

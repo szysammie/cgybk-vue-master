@@ -10,7 +10,7 @@
         @select="handSelect"
       >
       </el-autocomplete>
-
+    <el-button type="primary" icon="el-icon-plus" @click="addNewAc">发布活动</el-button>
     <div class="allCheck">
       <el-radio v-model="checkState" label="1" @change="getActivityByState('1')">所有活动({{countall}})</el-radio>
       <el-radio v-model="checkState" label="2" @change="getActivityByState('2')">进行中({{countprocess}})</el-radio>
@@ -28,8 +28,8 @@
           <p>结束时间：{{p.pwEnd}}</p>
         </div>
 
-        <el-button class="ac-btn" type="success" @click="inActivity(p.pwId)">进入活动</el-button>
-        <el-button class="ac-btn" type="danger" @click="editAcInfo(p.pwId)">编辑活动</el-button>
+        <el-button class="ac-btn" type="success" @click="inActivity(p.pwId)" icon="el-icon-caret-right">进入活动</el-button>
+        <el-button class="ac-btn" type="danger" @click="editAcInfo(p.pwId)" icon="el-icon-edit-outline">编辑活动</el-button>
       </li>
     </ul>
     <el-pagination
@@ -39,12 +39,13 @@
       :current-page="nowPage"
     >
     </el-pagination>
-
+    <addNewAc ref="addNewAc" v-on:listenAddEvent="listenAdd"></addNewAc>
   </div>
 </template>
 
 <script>
   import editActivity from './editActivity'
+  import addNewAc from './addNewAc'
     export default {
       data(){
         return{
@@ -61,7 +62,8 @@
         }
       },
       components:{
-        'editActivity':editActivity
+        'editActivity':editActivity,
+        'addNewAc':addNewAc
       },
       mounted(){
         this.getActivityByState(this.checkState)
@@ -146,7 +148,16 @@
           localStorage.setItem('nowAcId',pwId)
           this.$router.push({name:'teacher-editActivity'})
         },
-
+        addNewAc(){
+          this.$nextTick(() => {
+            this.$refs.addNewAc.init()
+          })
+        },
+        listenAdd(data){
+          if(data){
+            this.getActivityByState(this.checkState)
+          }
+        }
       }
 
     }

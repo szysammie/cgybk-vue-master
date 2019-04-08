@@ -14,8 +14,8 @@
     <div slot="header" class="clearfix">
       <i class="el-icon-info"></i><span>活动详情</span>
     </div>
-    <div class="text item">
-      <p>{{publishWork[0].pwContent}}</p>
+    <div class="text item" v-html="publishWork[0].pwContent">
+
     </div>
   </el-card>
     <el-card class="box-card">
@@ -49,6 +49,7 @@
               <el-button
                 size="mini"
                 type="success"
+                :disabled="!scope.row.state"
                 @click="handView(scope.row.url)">在线预览</el-button>
               <a :href="scope.row.url" download="download"> <el-button
                 size="mini"
@@ -107,7 +108,7 @@
         <el-upload
           class="upload-demo"
           :action="this.url"
-          :show-file-list="false"
+          :show-file-list="true"
           :on-success="uploadSuccess"
           :headers="headers"
           multiple
@@ -133,6 +134,7 @@
               <el-button
                 size="mini"
                 type="success"
+                :disabled="!scope.row.state"
                 @click="handView(scope.row.url)">在线预览</el-button>
               <a :href="scope.row.url" download="download"> <el-button
                 size="mini"
